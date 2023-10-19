@@ -1,15 +1,24 @@
 package alexandrelu1s.domain.model;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 
+@Entity(name = "tb_user")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    @OneToOne(cascade = CascadeType.ALL)
     private Account account;
+    @OneToOne(cascade = CascadeType.ALL)
     private Card card;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Feature> features;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<News> news;
 
     public long getId() {
